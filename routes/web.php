@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +18,4 @@ Route::get('/', function () {
 
 })->name('welcome');
 
-Route::resource('categories',UserController::class);
+Route::resource('categories',CategoryController::class);

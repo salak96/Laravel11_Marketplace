@@ -1,19 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        
-        return view('categories.index_categories');
+        $categories = Category::all();
+        // return $categories; check database
+        return view('categories.index_categories',
+            compact('categories' )
+    );
     }
 
     /**
@@ -21,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('categories.create_categories');
+        return view('categories.form_categories');
     }
 
     /**
@@ -52,7 +55,6 @@ class UserController extends Controller
     {
         return view('categories.edit_categories');
     }
-
     /**
      * Update the specified resource in storage.
      */
