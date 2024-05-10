@@ -32,7 +32,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi eror jika d save ga da isinya
+        $request->validate([
+            'name' => 'required|min:5|max:20',//name harus diisi
+            'slug' => 'required',
+            'icon' => 'required'
+        ]);
+
+        //check validation data
+        // dd($request->all());
+        Category::create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'icon' => $request->icon
+        ]);
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -51,23 +65,37 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        return view('categories.edit_categories');
+
+        return view('categories.edit_categories',compact('category'));
     }
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:5|max:20',//name harus diisi
+            'slug' => 'required',
+            'icon' => 'required'
+        ]);
+
+        $category->name = $request -> name;
+        $category-> slug =$request -> slug;
+        $category-> icon = $request -> icon;
+
+        $category-> update();
+
+        return redirect()->route('categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }

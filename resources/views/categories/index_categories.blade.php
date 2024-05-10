@@ -7,6 +7,8 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>Slug</th>
+                <th>icon</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +24,17 @@
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->slug }}</td>
+                <td>{{ $item->icon }}</td>
+                <td>
+                <a href="{{ route('categories.edit', $item->id) }}" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <form onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');" class="d-inline" action="{{ route('categories.destroy', $item->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+                </td>
             </tr>
             @empty
             <tr>
