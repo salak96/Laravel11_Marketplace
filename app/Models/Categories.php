@@ -10,4 +10,7 @@ class Categories extends Model
     use HasFactory;
     //file yang masuk database kalau banyak protected $guardted = [];
     protected $guarded = [];
+    
+
+
 }
