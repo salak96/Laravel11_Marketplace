@@ -93,6 +93,14 @@ This project serves as a guide to building a marketplace application using Larav
     php artisan filament:install --panels
     php artisan make:filament-user
     ```
+12. **Sidebar Menu filament:**
+    ```bash
+    php artisan make:filament-resource Customer
+    ```
+    or simpel
+    ```bash 
+   php artisan make:filament-resource Customer --simple
+    ````
 
     These commands configure Filament UI and create a user model for the admin panel.
 
