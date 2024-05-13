@@ -13,13 +13,16 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Set;
+use Illuminate\Support\Str;
 
 class CategoriesResource extends Resource
 {
     protected static ?string $model = Categories::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+    protected static ?string $navigationGroup = 'Setting';
+    protected static ?string $navigationLabel = 'Categories';
     public static function form(Form $form): Form
     {
         return $form
@@ -27,11 +30,14 @@ class CategoriesResource extends Resource
                 Forms\Components\Section::make('Categories')
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
+                            ->required(),
+                            // ->live()
+                            // ->afterStateUpdated(fn (Set $set, ?string $state) => $set
+                            // ('slug', Str::slug($state))),
+
+                        Forms\Components\TextInput::make('slug'),
                         Forms\Components\FileUpload::make('icon')
                             ->directory('icon')
-
                     ]),
 
 
