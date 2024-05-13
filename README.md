@@ -8,14 +8,14 @@ This project serves as a guide to building a marketplace application using Larav
 
 **Prerequisites:**
 
-* PHP and Composer installed on your development machine.
+* PHP 8.2 and Composer installed on your development machine.
 * A MySQL database server running.
 
 **Getting Started:**
 
 1. **Clone the repository:** (Assuming you have Git installed)
    ```bash
-   git clone https://your-repository-url.git
+   git clone https://github.com/salak96/Laravel11_Marketplace.git
    cd marketplace-app-learning
    ```
 
@@ -71,7 +71,6 @@ This project serves as a guide to building a marketplace application using Larav
    php artisan make:view products.create
    # (Add other views as needed)
    ```
-
    This creates Blade template files for rendering the user interface.
 
 9. **View available routes:**
@@ -85,7 +84,6 @@ This project serves as a guide to building a marketplace application using Larav
     ```bash
     composer require filament/filament:"^3.2" -W
     ```
-
     Filament UI provides a powerful and customizable admin panel.
 
 11. **(Optional) Set up Filament UI:**
@@ -101,6 +99,10 @@ This project serves as a guide to building a marketplace application using Larav
     ```bash 
    php artisan make:filament-resource Customer --simple
     ````
+13. **Storage links:file uploads**
+    ```bash
+    php artisan storage:link
+
 
     These commands configure Filament UI and create a user model for the admin panel.
 

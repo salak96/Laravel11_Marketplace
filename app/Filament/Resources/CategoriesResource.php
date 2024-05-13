@@ -29,14 +29,8 @@ class CategoriesResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(255),
-
-                        Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255),
-
-                        Forms\Components\Textarea::make('icon')
-                            ->required()
-                            ->maxLength(255),
+                        Forms\Components\FileUpload::make('icon')
+                            ->directory('icon')
 
                     ]),
 
@@ -50,8 +44,8 @@ class CategoriesResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('icon'),
-                
+                Tables\Columns\ImageColumn::make('icon'),
+
             ])
             ->filters([
                 //
