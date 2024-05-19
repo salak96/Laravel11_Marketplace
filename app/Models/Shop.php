@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class detailProduct extends Model
+class Shop extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillabe = [
+        'name','contact'
+    ];
+
+    
+    
 }

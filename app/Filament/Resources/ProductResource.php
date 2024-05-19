@@ -45,12 +45,26 @@ class ProductResource extends Resource
             ->columnSpanFull(),
             Forms\Components\FileUpload::make('image')->columnSpanFull()
                 ->directory('image-product')
-                ->required()
-                ,
+                ->required(),
 
-            ])->columns(2)
-            ]);
+            ])->columns(2),
 
+            Forms\Components\Section::make('DetailProduct')
+            ->schema([
+            Forms\Components\Repeater::make('detailProduct')
+                         ->schema([
+                            Forms\Components\FileUpload::make('name_image')->columnSpanFull()
+                            ->directory('image-product_detail')
+                            ->required()
+                            ->columnSpan(2),
+                            Forms\Components\TextInput::make('caption')
+                            ->required()
+                        
+                        ])->columnSpanFull()
+
+            ])->columns(2),
+
+        ]);
     }
 
     public static function table(Table $table): Table
