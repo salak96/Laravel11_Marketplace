@@ -23,7 +23,7 @@ class ProductResource extends Resource
     {
         return $form
         ->schema([
-        Forms\Components\Select::make('category_id')//all categores
+        Forms\Components\Select::make('categories_id')//all categores
             ->relationship('category', 'name')
             ->required()
         ,
