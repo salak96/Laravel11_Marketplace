@@ -9,9 +9,7 @@ class Shop extends Model
 {
     use HasFactory;
 
-    protected $fillabe = [
-        'name','contact'
-    ];
+    protected $guarded = [];
 
     
     

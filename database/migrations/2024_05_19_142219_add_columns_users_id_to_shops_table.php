@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->string('name')->after('id');
-            $table->string('slug')->after('name');
-            $table->string('icon')->nullable()->after('slug');
+        Schema::table('shops', function (Blueprint $table) {
+            $table->string('banner');
+            $table->string('address');
+            $table->string('description');
+            $table->string('logo_picture');
         });
     }
 
@@ -23,8 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            //
+        Schema::table('shops', function (Blueprint $table) {
+            $table->dropColumn(['banner', 'address', 'description', 'logo_picture']);
         });
     }
 };
