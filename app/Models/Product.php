@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -15,5 +16,11 @@ class Product extends Model
     {
         return $this->belongsTo(Categories::class, 'category_id','id');
     }
+    
 
+    public function detailProduct (): HasMany
+    {
+        return $this->hasMany(DetailProduct::class, 'product_id', 'id');
+    } 
+ 
 }
