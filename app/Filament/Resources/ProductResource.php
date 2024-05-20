@@ -25,17 +25,19 @@ class ProductResource extends Resource
         ->schema([
         Forms\Components\Select::make('categories_id')//all categores
             ->relationship('category', 'name')
-            ->required()
-        ,
-
-        Forms\Components\Section::make('Product')
-            ->schema([
+            ->required(),
+            Forms\Components\Select::make('shop_id')//all categores
+            ->relationship('shop', 'name')
+            ->required(), 
+            Forms\Components\Select::make('unit_id')//all categores
+            ->relationship('units', 'name')
+            ->required(),   
             Forms\Components\TextInput::make('name')
                 ->required()
                 ->columnSpanFull(),
-
             Forms\Components\TextInput::make('price')
             ->prefix('Rp')
+            ->integer()
             ->required()
             ->requiredWith('field,another_field'),
             Forms\Components\TextInput::make('discount'),
@@ -46,12 +48,10 @@ class ProductResource extends Resource
             Forms\Components\FileUpload::make('image')->columnSpanFull()
                 ->directory('image-product')
                 ->required(),
-
-            ])->columns(2),
-
-            Forms\Components\Section::make('DetailProduct')
+            Forms\Components\Section::make('detail product')
             ->schema([
             Forms\Components\Repeater::make('detailProduct')
+            ->relationship('detailProduct')
                          ->schema([
                             Forms\Components\FileUpload::make('name_image')->columnSpanFull()
                             ->directory('image-product_detail')
