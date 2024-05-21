@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\Builder;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -26,10 +27,12 @@ class ProductResource extends Resource
         Forms\Components\Select::make('categories_id')//all categores
             ->relationship('category', 'name')
             ->required(),
-            Forms\Components\Select::make('shop_id')//all categores
-            ->relationship('shop', 'name')
+            Forms\Components\Select::make('shop_id')
+            ->relationship('shop', 'name',
+                modifyQueryUsing:fn(Builder $query) 
+                => $query->where('user_id', auth()->id))
             ->required(), 
-            Forms\Components\Select::make('unit_id')//all categores
+            Forms\Components\Select::make('unit_id')
             ->relationship('units', 'name')
             ->required(),   
             Forms\Components\TextInput::make('name')
