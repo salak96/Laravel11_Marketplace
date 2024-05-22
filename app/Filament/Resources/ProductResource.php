@@ -5,13 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
 use Filament\Forms;
-use Filament\Forms\Components\Builder;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-
+use Illuminate\Database\Eloquent\Builder;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
@@ -24,18 +23,20 @@ class ProductResource extends Resource
     {
         return $form
         ->schema([
-        Forms\Components\Select::make('categories_id')//all categores
+            Forms\Components\TextInput::make('name')
+            ->required(),
+            Forms\Components\Select::make('categories_id')//all categores
             ->relationship('category', 'name')
             ->required(),
             Forms\Components\Select::make('shop_id')
-            ->relationship('shop', 'name',)
-            ->required(), 
+            ->relationship('shops', 'name',
+            modifyQueryUsing: fn (Builder $query) 
+            => $query->where('user_id', auth()->id()))//erorr
+            
+            ->columnSpan(1),
             Forms\Components\Select::make('unit_id')
             ->relationship('units', 'name')
             ->required(),   
-            Forms\Components\TextInput::make('name')
-                ->required()
-                ->columnSpanFull(),
             Forms\Components\TextInput::make('price')
             ->prefix('Rp')
             ->integer()
@@ -110,4 +111,13 @@ class ProductResource extends Resource
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
-}
+
+    
+    public static function getEloquentQuery(): Builder
+    {
+    return parent::getEloquentQuery()->whereHas('shop', function ($query) {
+        $query->where('user_id', auth()->id());
+    });
+ }
+}        
+     

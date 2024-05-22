@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ShopResource\Pages;
 use App\Models\Shop;
-use Doctrine\DBAL\Schema\Column;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -54,7 +53,6 @@ class ShopResource extends Resource
                 Tables\Columns\ImageColumn::make('logo_picture'),
                 Tables\Columns\TextColumn::make('description'),
 
-                    
                    
             ])
             ->filters([
@@ -62,6 +60,7 @@ class ShopResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -86,6 +85,7 @@ class ShopResource extends Resource
         ];
     }
 
+    //filter tampilaan shop yang buat user yang login
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->where('user_id',auth()->id());

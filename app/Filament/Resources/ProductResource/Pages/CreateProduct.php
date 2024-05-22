@@ -18,7 +18,7 @@ class CreateProduct extends CreateRecord
     {
         $data['slug'] = Str::slug($data['name']);
         // $data['stock'] = 10;
-        // $data['user_id'] = auth()->id();
+        $data['user_id'] = auth()->id();
         return $data;
     }
 
