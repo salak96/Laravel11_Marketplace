@@ -74,6 +74,8 @@ class ProductResource extends Resource
         ->columns([
             Tables\Columns\TextColumn::make('name'),
             Tables\Columns\TextColumn::make('slug'),
+            Tables\Columns\TextColumn::make('price'),
+            
             Tables\Columns\TextColumn::make('category.name'),
             Tables\Columns\ImageColumn::make('image'),
 

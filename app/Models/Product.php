@@ -20,13 +20,13 @@ class Product extends Model
     }
     
 
-    public function detailProduct (): HasMany
+    public function detailProduct(): HasMany
     {
         return $this->hasMany(DetailProduct::class, 'product_id', 'id');
     } 
     
 
-    public function shop (): BelongsTo{
+    public function shop(): BelongsTo{
        return $this->belongsTo(Shop::class,
         'shop_id', 'id'); 
     }

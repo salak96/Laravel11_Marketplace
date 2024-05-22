@@ -19,8 +19,6 @@ class CreateProduct extends CreateRecord
         $data['slug'] = Str::slug($data['name']);
         // $data['stock'] = 10;
         // $data['user_id'] = auth()->id();
-        $data['shop_id'] = 1;
-
         return $data;
     }
 
@@ -32,8 +30,8 @@ class CreateProduct extends CreateRecord
         Forms\Components\Select::make('categories_id')//all categores
             ->relationship('category', 'name')
             ->required(),
-            // Forms\Components\Select::make('shop_id')
-            // ->relationship('shops', 'name'),
+            Forms\Components\Select::make('shop_id')
+            ->relationship('shop', 'name'),
          Forms\Components\Select::make('unit_id')
            ->relationship('units', 'name'),
         Forms\Components\TextInput::make('name')
