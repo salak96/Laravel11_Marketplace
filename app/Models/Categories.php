@@ -11,6 +11,9 @@ class Categories extends Model
     //file yang masuk database kalau banyak protected $guardted = [];
     protected $guarded = [];
     
+    public function products()
+    {
+    return $this->hasMany(Product::class,'categories_id','id'); 
 
-
+    }
 }

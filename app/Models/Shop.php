@@ -12,5 +12,4 @@ class Shop extends Model
     protected $guarded = [];
 
     
-    
 }

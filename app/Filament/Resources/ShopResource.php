@@ -4,14 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ShopResource\Pages;
 use App\Models\Shop;
+use Doctrine\DBAL\Schema\Column;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ShopResource extends Resource
 {
@@ -25,9 +24,22 @@ class ShopResource extends Resource
         ->schema([     
             Forms\Components\TextInput::make('name')
                 ->required()
-                ->maxLength(255),   
+                ->maxLength(25),   
             Forms\Components\TextInput::make('contact')
+            ->required()
+            ->maxLength(15),  
+                Forms\Components\FileUpload::make('banner')
+            ->image(),
+            Forms\Components\TextInput::make('address')
                 ->maxLength(255),
+                Forms\Components\FileUpload::make('logo_picture')
+                ->image()
+                ->required()
+                ,
+                Forms\Components\Textarea::make('description')
+                ->required()
+                ->maxLength(255),
+
         ]);
     
     }
@@ -38,6 +50,12 @@ class ShopResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('contact'),
+                Tables\Columns\TextColumn::make('address'),
+                Tables\Columns\ImageColumn::make('logo_picture'),
+                Tables\Columns\TextColumn::make('description'),
+
+                    
+                   
             ])
             ->filters([
                 //
@@ -67,4 +85,10 @@ class ShopResource extends Resource
             'edit' => Pages\EditShop::route('/{record}/edit'),
         ];
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('user_id',auth()->id());
+    }
+    
 }

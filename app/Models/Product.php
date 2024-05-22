@@ -13,9 +13,10 @@ class Product extends Model
 
     protected $guarded = [];
 
-    public function category()
+    public function category():BelongsTo
     {
-        return $this->belongsTo(Categories::class, 'categories_id','id');
+        return $this->belongsTo(Categories::class,
+         'categories_id','id');
     }
     
 
@@ -26,11 +27,15 @@ class Product extends Model
     
 
     public function shop (): BelongsTo{
-       return $this->belongsTo(Shop::class, 'shop_id', 'id'); 
+       return $this->belongsTo(Shop::class,
+        'shop_id', 'id'); 
     }
 
     public function units():BelongsTo
     {
-        return $this->belongsTo(units::class, 'unit_id', 'id');
+        return $this->belongsTo(units::class,
+         'unit_id', 'id');
     }
+
+    
 }

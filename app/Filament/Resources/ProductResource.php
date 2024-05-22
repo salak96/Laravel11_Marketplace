@@ -28,9 +28,7 @@ class ProductResource extends Resource
             ->relationship('category', 'name')
             ->required(),
             Forms\Components\Select::make('shop_id')
-            ->relationship('shop', 'name',
-                modifyQueryUsing:fn(Builder $query) 
-                => $query->where('user_id', auth()->id))
+            ->relationship('shop', 'name',)
             ->required(), 
             Forms\Components\Select::make('unit_id')
             ->relationship('units', 'name')
