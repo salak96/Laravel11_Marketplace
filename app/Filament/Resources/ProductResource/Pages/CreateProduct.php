@@ -31,10 +31,11 @@ class CreateProduct extends CreateRecord
             ->relationship('category', 'name')
             ->required(),
             Forms\Components\Select::make('shop_id')
-            ->relationship('shop', 'name'),
-         Forms\Components\Select::make('unit_id')
-           ->relationship('units', 'name'),
-        Forms\Components\TextInput::make('name')
+            ->required()
+            ->relationship('shops', 'name'),
+            Forms\Components\Select::make('unit_id')
+            ->relationship('units', 'name'),
+             Forms\Components\TextInput::make('name')
             ->required()
             ->columnSpanFull(),
             Forms\Components\TextInput::make('price')

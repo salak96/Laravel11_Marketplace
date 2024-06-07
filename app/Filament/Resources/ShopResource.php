@@ -26,11 +26,15 @@ class ShopResource extends Resource
                 ->maxLength(25),   
             Forms\Components\TextInput::make('contact')
             ->required()
-            ->maxLength(15),  
-                Forms\Components\FileUpload::make('banner')
-            ->image(),
-            Forms\Components\TextInput::make('address')
+            ->maxLength(255),
+               
+                Forms\Components\TextInput::make('address')
+                ->required()
                 ->maxLength(255),
+                Forms\Components\FileUpload::make('banner')
+                ->image()
+                ->required()
+               ,
                 Forms\Components\FileUpload::make('logo_picture')
                 ->image()
                 ->required()

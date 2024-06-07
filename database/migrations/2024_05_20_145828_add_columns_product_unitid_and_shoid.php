@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('shop_id');
             $table->foreign('shop_id')->references('id')->on('shops')->onUpdate('cascade')->onDelete('cascade');
-
+      // $table->foreign('user_id');
         });
     }
 

@@ -16,11 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('contact');
-            // $table->string('banner');
-            // $table->string('address');
-            // $table->string('description');
-            // $table->string('logo_picture');
-            
             $table->timestamps();
     
             $table->unsignedBigInteger('user_id');

@@ -9,8 +9,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-
 use Illuminate\Database\Eloquent\Builder;
+
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
@@ -30,19 +30,21 @@ class ProductResource extends Resource
             ->required(),
             Forms\Components\Select::make('shop_id')
             ->relationship('shops', 'name',
-            modifyQueryUsing: fn (Builder $query) 
-            => $query->where('user_id', auth()->id()))//erorr
-            
-            ->columnSpan(1),
-            Forms\Components\Select::make('unit_id')
-            ->relationship('units', 'name')
-            ->required(),   
+                modifyQueryUsing:fn(Builder $query)=>
+                $query->where('user_id',auth()->id())),
+            // Forms\Components\Select::make('unit_id')
+            // ->relationship('units', 'name')
+            // ->required(),   
             Forms\Components\TextInput::make('price')
             ->prefix('Rp')
             ->integer()
             ->required()
             ->requiredWith('field,another_field'),
-            Forms\Components\TextInput::make('discount'),
+            Forms\Components\TextInput::make('Discount')
+            ->prefix('Rp')
+            ->integer()
+            ->required()
+            ->requiredWith('field,another_field'),
             Forms\Components\RichEditor::make('description')
             ->required()
             ->requiredWithAll('field,another_field')
@@ -52,33 +54,35 @@ class ProductResource extends Resource
                 ->required(),
             Forms\Components\Section::make('detail product')
             ->schema([
-            Forms\Components\Repeater::make('detailProduct')
-            ->relationship('detailProduct')
-                         ->schema([
-                            Forms\Components\FileUpload::make('name_image')->columnSpanFull()
-                            ->directory('image-product_detail')
-                            ->required()
-                            ->columnSpan(2),
-                            Forms\Components\TextInput::make('caption')
-                            ->required()
+            // Forms\Components\Repeater::make('detailProduct')
+            // ->relationship('detailProduct')
+            //              ->schema([
+            //                 Forms\Components\FileUpload::make('name_image')->columnSpanFull()
+            //                 ->directory('image-product_detail')
+            //                 ->required()
+            //                 ->columnSpan(2),
+            //                 Forms\Components\TextInput::make('caption')
+            //                 ->required()
                         
-                        ])->columnSpanFull()
+            //             ])->columnSpanFull()
 
             ])->columns(2),
 
-        ]);
+
+        ]); 
+        
     }
 
     public static function table(Table $table): Table
     {
         return $table
         ->columns([
-            Tables\Columns\TextColumn::make('name'),
-            Tables\Columns\TextColumn::make('slug'),
-            Tables\Columns\TextColumn::make('price'),
-            
-            Tables\Columns\TextColumn::make('category.name'),
-            Tables\Columns\ImageColumn::make('image'),
+            Tables\Columns\TextColumn::make('name')
+            ->searchable(),
+        Tables\Columns\TextColumn::make('slug'),
+        Tables\Columns\TextColumn::make('category.name')
+            ->label('Category Product'),
+        Tables\Columns\ImageColumn::make('image'),
 
         ])
             ->filters([
@@ -112,12 +116,12 @@ class ProductResource extends Resource
         ];
     }
 
-    
+    //filter tabel shope
     public static function getEloquentQuery(): Builder
     {
-    return parent::getEloquentQuery()->whereHas('shop', function ($query) {
+    return parent::getEloquentQuery()->whereHas('shops', function ($query) {
         $query->where('user_id', auth()->id());
     });
- }
+    }
 }        
      
