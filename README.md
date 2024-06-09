@@ -98,11 +98,11 @@ This project serves as a guide to building a marketplace application using Larav
     or simpel
     ```bash 
    php artisan make:filament-resource Customer --simple
-    ````
+    ```
 13. **Storage links:file uploads**
     ```bash
     php artisan storage:link
-
+    ```
 
     These commands configure Filament UI and create a user model for the admin panel.
 
